@@ -56,6 +56,26 @@ router.route('/orders').post((request, response) => {
  })
 
 
+ 
+router.route('/orders/:id').post((request, response) => {
+   console.log(request.body)
+   let  order = { ...request.body }
+   dboperations.updateOrder(order).then(data  => {
+     response.status(201).json(data);
+   })
+ })
+
+ router.route('/orders/:id').delete((request, response) => {
+   console.log(request.body)
+   let  order = { ...request.body }
+   dboperations.deleteOrder(order).then(data  => {
+     response.status(201).json(data);
+   })
+ })
+
+
+
+
 var port = process.env.PORT || 8090;
 app.listen(port);
 console.log('Order API is runnning at ' + port);
